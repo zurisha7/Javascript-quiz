@@ -13,66 +13,7 @@ var storage = document.getElementById("storage");
 
 var timer = document.getElementById("timer");
 
-//timer var
 
-var tminutes = parseInt(total_seconds/90);
-var tseconds = parseInt(total_seconds%90);
-var total_seconds = 90
-
-//click button to start timer
-//startBtn.addEventListener("click", function setTimer(){       document.getElementById("timer").innerHTML = ' Time Left: ' + tminutes + ' minutes ' + tseconds + ' seconds ';
-     //  if(total_seconds <= 0 ){
-        //   setTimeout('document.quiz.submit()', 1);
-       //} else {
-         //  total_seconds = total_seconds -1;
-        //   tminutes = parseInt(total_seconds/90);
-        //   tseconds = parseInt(total_seconds%90);
-        //   setTimeout("setTimer()", 1000);
-    //   }
-     //  setTimeout("setTimer()", 1000);
-    //   });
-//click Go to show Question
-startBtn.addEventListener("click", showQuestion());
-
-//when clicked Go will disappear
-btn.addEventListener('click', () => {
-    // hide button
-    btn.style.display = 'none'});
-
-
-
-function showQuestion(question)  {
-    
-    questionCon.innerHTML = pickQuestions.pickQuestions
-    question.answers.forEach(answer => {
-        var button = document.createElement("button")
-        button.innerHTML = answer.text
-        button.classList.add("btn")
-            if(answer.true){
-                button.dataset.correct = answer.true
-            }
-            button.addEventListener("click", true)
-            answer.appendChild.button
-        
-})};
-        
-
-    
- 
-//function to start Quiz
-function startQuiz() { 
-   console.log("started")
-   };
-    startQuiz();
-//nextQuestion()
-
-var currentQuestionIndex = 0
-
-
-
-function nextQuestion(){
-    showQuestion([currentQuestionIndex])
-};
 
 var pickQuestions = [
     {
@@ -132,9 +73,64 @@ var pickQuestions = [
     ]
 }];
 
+//timer var
+
+var tminutes = parseInt(total_seconds/90);
+var tseconds = parseInt(total_seconds%90);
+var total_seconds = 90
+
+// click button to start timer
+ function setTimer(){
+        document.getElementById("timer").innerHTML = ' Time Left: ' + tminutes + ' minutes ' + tseconds + ' seconds ';
+       if(total_seconds <= 0 ){
+         setTimeout('document.quiz.submit()', 1);
+       } else {
+          total_seconds = total_seconds -1;
+          tminutes = parseInt(total_seconds/90);
+          tseconds = parseInt(total_seconds%90);
+          setTimeout("setTimer()", 1000);
+       }
+       setTimeout("setTimer()", 1000);
+    };
+//click Go to show Question
+startBtn.addEventListener("click", showQuestion());
+
+//when clicked Go will disappear
+btn.addEventListener('click', () => {
+    // hide button
+    btn.style.display = 'none'});
 
 
 
-   
+function showQuestion(question)  {
+    
+    questionCon.innerHTML = pickQuestions
+     question.answers.forEach(answer => {
+        var button = document.createElement("button")
+        button.innerHTML = answer.text
+        button.classList.add("btn")
+            if(answer.correct){
+                button.dataset.correct = answer.correct
+            }
+            button.addEventListener("click", true)
+            answer.appendChild.button
+        
+})};
+        
+
+    
+ 
+//function to start Quiz
+function startQuiz() { 
+   console.log("started")
+   };
+    startQuiz();
+//nextQuestion()
+
+var currentQuestionIndex = 0
 
 
+
+function nextQuestion(){
+    showQuestion([currentQuestionIndex])
+};
