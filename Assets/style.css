@@ -33,13 +33,14 @@ body * {
     flex-wrap: wrap;
 }
 
-.answers {
+
+.ansText {
     background-color: blueviolet;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 500px;
-    height: 50px;
+    width: 100%;
+    height: 30px;
+
     padding: 10px;
-    margin: 10px;
     border-radius: 15px;
 }
 .results, .storage{
