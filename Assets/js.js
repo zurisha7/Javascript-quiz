@@ -10,7 +10,8 @@ var correctAnswers = true;
 var score = 0;
 var questionCounter =0;
 var availableQuestions = [];
-
+var scoreText= document.getElementById("scoreTotal");
+var questText= document.getElementById("questTotal");
 // Quiz questions and answers
 var pickQuestions = [
     {
@@ -56,7 +57,7 @@ var pickQuestions = [
     question: "What does IIFE stand for?",
         answer1: "If I Forget Everything",
         answer2: "Immediately Invoked Function",
-        answer3: "If Else",
+        answer3: "If Else", 
         answer4: "innerFuntion",
         answer: 2
 }];
@@ -100,7 +101,6 @@ function startQuiz () {
     questionCounter = 0;
     score=0;
     availableQuestions = [...pickQuestions];
-    console.log(availableQuestions);
     showNewQuestion();
 
 };
@@ -109,34 +109,48 @@ function showNewQuestion() {
     if(availableQuestions.length === 0 || questionCounter >= max_questions){
         //go to results
       //  return window.location.assign(*/end.html*);
-    
+    }
     questionCounter++;
     var questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     quest.innerText = currentQuestion.question;
 
     answersEl.forEach(answer => {
-        var number = answer['number'];
-        answer.innerText =
-        currentQuestion['answer' + number];
-    
+        var number = answer.dataset['number'];
+        answer.innerText = currentQuestion['answer' + number];
     });
 
 
-availableQuestions.splice(questionIndex, 1);
-
-correctAnswers = true; 
+    availableQuestions.splice(questionIndex, 1);
+    correctAnswers = true; 
     
-}};
+};
 
-answersEl.forEach(answers => {
-    answers.addEventListener("click", function() {
+answersEl.forEach(answer => {
+    answer.addEventListener("click", e => {
         if(!correctAnswers) return;
-        acceptedAnswers = false;
-        var selectedAnswer = EventTarget;
-        var selectedChoice = selectedAnswer.dataset["number"];
-        showNewQuestion();
+        correctAnswers = false;
+        var selectedChoice = e.target;
+        var selectedAnswer = selectedChoice.dataset['number'];
+
+        var classApply = 'incorrect';
+        if(selectedAnswer == currentQuestion.answer)
+        classApply = 'correct';
+        
+        if(classApply === "correct"){
+        incScore(answer_points);
+        }
+    selectedChoice.classList.add(classApply);
+
+     setTimeout( () => {
+    selectedChoice.classList.remove(classApply);
+     showNewQuestion();
+     }, 1000);
 });
 });
 
+function incScore(num) {
+    score += num;
+    scoreText.innerText = score;
+};
 startQuiz();
