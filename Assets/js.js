@@ -3,15 +3,19 @@
 var startBtn = document.getElementById("go");
 var questions = document.getElementById("quest");
 var questionCon= document.getElementById("card");
+
 var answersEl = Array.from(document.getElementsByClassName("ansText"));
- 
+
+var scoreText= document.getElementById("scoreTotal");
+var questText= document.getElementById("questTotal");
+
 var currentQuestion = {};
 var correctAnswers = true;
 var score = 0;
 var questionCounter =0;
 var availableQuestions = [];
-var scoreText= document.getElementById("scoreTotal");
-var questText= document.getElementById("questTotal");
+
+
 // Quiz questions and answers
 var pickQuestions = [
     {
@@ -68,21 +72,27 @@ var pickQuestions = [
 var tminutes = parseInt(total_seconds/90);
 var tseconds = parseInt(total_seconds%90);
 var total_seconds = 90;
-
 // click button to start timer
-// function setTimer(){
-//        document.getElementById("timer").innerHTML = ' Time Left: ' + tminutes + ' minutes ' + tseconds + ' seconds ';
- //      if(total_seconds <= 0 ){
- ///        setTimeout('document.quiz.submit()', 1);
-  //     } else {
- //         total_seconds = total_seconds -1;
- //         tminutes = parseInt(total_seconds/90);
- //         tseconds = parseInt(total_seconds%90);
- //         setTimeout("setTimer()", 1000);
- //      }
- //      setTimeout("setTimer()", 1000);
- //   };
-//
+
+ startBtn.addEventListener("click", setTimer()
+ 
+ 
+ function setTimer(){ 
+       document.getElementById("timer").innerHTML = ' Time Left: ' + tminutes + ' minutes ' + tseconds + ' seconds ';
+       if(total_seconds === 0 ){
+           alert("Sorry! You are Out of Time!!");
+        return window.location.assign(index2.html)
+       } else {
+          total_seconds = total_seconds -1;
+          tminutes = parseInt(total_seconds/90);
+         tseconds = parseInt(total_seconds%90);
+         setInterval("setTimer()", 1000);
+       }
+        setInterval("setTimer()", 1000);
+
+
+ });
+
     
 // points for correct answer 
 var answer_points = 10;
@@ -107,13 +117,14 @@ function startQuiz () {
 function showNewQuestion() {
     // if out of questions 
     if(availableQuestions.length === 0 || questionCounter >= max_questions){
-        //go to results
-      //  return window.location.assign(*/end.html*);
+        localStorage.setItem('mostRecentScore', score)
+        //go to results pages
+       return window.location.assign("index2.html");
     }
     questionCounter++;
     var questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
-    quest.innerText = currentQuestion.question;
+    questions.innerText = currentQuestion.question;
 
     answersEl.forEach(answer => {
         var number = answer.dataset['number'];
@@ -154,3 +165,4 @@ function incScore(num) {
     scoreText.innerText = score;
 };
 startQuiz();
+
