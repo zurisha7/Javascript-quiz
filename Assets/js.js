@@ -74,30 +74,32 @@ var tseconds = parseInt(total_seconds%90);
 var total_seconds = 90;
 // click button to start timer
 
- startBtn.addEventListener("click", setTimer()
+ startBtn.addEventListener("click", setTimer);
+
  
- 
+ // timer_function
+
  function setTimer(){ 
-       document.getElementById("timer").innerHTML = ' Time Left: ' + tminutes + ' minutes ' + tseconds + ' seconds ';
-       if(total_seconds === 0 ){
-           alert("Sorry! You are Out of Time!!");
-        return window.location.assign(index2.html)
-       } else {
-          total_seconds = total_seconds -1;
-          tminutes = parseInt(total_seconds/90);
-         tseconds = parseInt(total_seconds%90);
-         setInterval("setTimer()", 1000);
-       }
-        setInterval("setTimer()", 1000);
+       document.getElementById("timer").innerHTML = ' Time Left: ' + tseconds + ' seconds ';
+       if(total_seconds <= 0 ){
+           // stop timer and go to results page 
+     clearInterval(timer);
+     alert("Times Up! Go to Results");
+     return window.location.assign("index2.html");
+        } else {
+          total_seconds = total_seconds - 1;
+          tminutes = parseInt(total_seconds / 0);
+         tseconds = (total_seconds % 90);
+         timer= setTimeout("setTimer()", 1000);
+        }
+ };
 
-
- });
-
+ 
     
 // points for correct answer 
 var answer_points = 10;
 //quiz length
-var max_questions = 5;
+var max_questions = 6;
 
 
 var results = document.getElementById("results");
@@ -116,7 +118,7 @@ function startQuiz () {
 };
 function showNewQuestion() {
     // if out of questions 
-    if(availableQuestions.length === 0 || questionCounter >= max_questions){
+    if(availableQuestions.length <= 1 || questionCounter >= max_questions){
         localStorage.setItem('mostRecentScore', score)
         //go to results pages
        return window.location.assign("index2.html");

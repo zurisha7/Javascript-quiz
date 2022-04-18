@@ -31,7 +31,7 @@ body * {
     flex-wrap: wrap;
 }
 
-
+/*color of answer buttons*/
 .ansText {
     background-color: blueviolet;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -50,14 +50,15 @@ body * {
     font-size: 40px;
     color:red;
 }
-
+/*turn green when wrong*/
 .correct {
     background-color: greenyellow;
 
 }
-
+/*turn red when wrong*/
 .incorrect {
     background-color: red;
 
 }
 
+>
