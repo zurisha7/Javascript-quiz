@@ -76,7 +76,10 @@ var total_seconds = 90;
 
  startBtn.addEventListener("click", setTimer);
 
- 
+ startBtn.addEventListener("click", function(){
+// click to hide button and show quiz
+    startBtn.style.display = 'none';
+    questionCon.style.visibility ='visible' });
  // timer_function
 
  function setTimer(){ 
@@ -123,11 +126,12 @@ function showNewQuestion() {
         //go to results pages
        return window.location.assign("index2.html");
     }
+    //advance one question at a time randomly and display
     questionCounter++;
     var questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     questions.innerText = currentQuestion.question;
-
+//assign and show answer for each question
     answersEl.forEach(answer => {
         var number = answer.dataset['number'];
         answer.innerText = currentQuestion['answer' + number];
@@ -138,7 +142,7 @@ function showNewQuestion() {
     correctAnswers = true; 
     
 };
-
+//click on the answer and apply correct or incorrect
 answersEl.forEach(answer => {
     answer.addEventListener("click", e => {
         if(!correctAnswers) return;
@@ -161,7 +165,7 @@ answersEl.forEach(answer => {
      }, 1000);
 });
 });
-
+// assign and show score
 function incScore(num) {
     score += num;
     scoreText.innerText = score;

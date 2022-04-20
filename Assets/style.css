@@ -10,18 +10,20 @@ body * {
     font-size:50px;
     
 }
-
+/* hide questions */
 .container {
     margin-top: 25px;
+    visibility: hidden;
 }
 
 /*style the start button*/
-.startBtn {
-    background-color: greenyellow;
+.btn {
+    background-color: #ff69b4;
     color:black;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 15px;
-    width: 70px;
+    width: 90px;
+    margin: 10px;
 }
 
 .questions {
@@ -45,12 +47,12 @@ body * {
     font-size: 20px;
 
 }
-
+/*timer*/
 .quiztime {
     font-size: 40px;
     color:red;
 }
-/*turn green when wrong*/
+/*turn green when right*/
 .correct {
     background-color: greenyellow;
 
@@ -61,4 +63,6 @@ body * {
 
 }
 
->
+.Instruct {
+    font-size: 25px;
+}
