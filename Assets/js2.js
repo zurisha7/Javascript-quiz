@@ -3,10 +3,10 @@ var saveBtn= document.getElementById("save");
 var finalResults = document.getElementById("finalResults");
 var playAgain = document.getElementById("reload");
 var highScoreButton = document.getElementById("highBtn");
-var highScoreList = document.getElementById("list");
 
-var highScore = JSON.parse(localStorage.getItem('highscores')) || [];
-var mostRecentScore= localStorage.getItem('mostRecentScore');
+
+var highScore = JSON.parse(localStorage.getItem('highScores'));
+var mostRecentScore= JSON.parse(localStorage.getItem('mostRecentScore')) || [];
 var MAX_HIGH_SCORE = 5;
 
 //save highscores
@@ -22,36 +22,42 @@ playAgain.addEventListener("click", function () {
         // get input value
         var initials = document.getElementById("initials").value
         //set score
-        var score = {
+         var score = {
             score: mostRecentScore,
             initials: initials
-        }
-
-        var 
-        //add the scores and then sort 
-        highScore = Array.prototype.push(score);
-        highScore = Array.prototype.sort ((a,b) => b.score - a.score);
-        // only provide the top 5
-        highScore.splice(5);
+         }
     
-        localStorage.setItem('highscores', JSON.stringify(highScore));
-    });
-
-
-
-       highScoreButton.addEventListener("click", function(){
-
-        var scores = localStorage.getItem('highscores', []);
-
-        var listInfo = document.createElement("li");
-         //add the info from storage
-        listInfo.textContent = scores;   
-        //assign a spot
-        highScoreList.appendChild(listInfo);
+         var highScore = JSON.parse(localStorage.getItem('highScores')) || [];
+          highScore.push(score);
+          window.localStorage.setItem('highScores', JSON.stringify(highScore));
         
     });
 
+    
+      //display score function
 
+        function printHighScores() {
+            //click the button to get high scores
+            highScoreButton.addEventListener("click", function(){
+                //retrieve array from local storage, then loop through to get all values
+                var getHighScore = localStorage.getItem('highScores');
+               var array = " "
+                for (var i = 0; i < getHighScore; i++); {
+                    array += getHighScore;
+                
+                console.log(array)
+                //create element and append
+                    var listInfo = document.createElement("li");
+                  listInfo.textContent = array;
+                var highScoreList = document.getElementById("list");
+                    highScoreList.appendChild(listInfo);
+                
+                }
+        })
+    };
+    
+    printHighScores();
+   
 
 
 
